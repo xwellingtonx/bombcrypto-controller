@@ -1,0 +1,104 @@
+#bombcryptoController {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 125px;
+  user-select: none;
+  background-color: rgba(0,0,0,0.5);
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+
+#bombcryptoController .dark-orange {
+  fill: #ff7323;
+}
+
+#bombcryptoController .yellow {
+  fill: #ffaa23;
+}
+
+#bombcryptoController .white {
+  fill: #fff;
+}
+
+.bombcrypt-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  z-index: 100;
+}
+
+.bombcrypt-controls #analogContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;	
+  pointer-events: auto;
+  fill: #FAFAFA;
+  width: 120px;
+  height: 120px;
+  margin-left: 25%;
+}
+  
+.bombcrypt-controls #analogContainer svg {
+  background-color: transparent;
+  height: 100%;
+  width: 100%;
+}
+
+.bombcrypt-controls .analog-background {
+  opacity: 0.5;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.bombcrypt-controls .analog-stick {
+  z-index: 100;
+  width: 68px !important;
+  height: 68px !important;
+}
+
+.bombcrypt-controls #bombButton {
+  margin-right: 25%;
+  width: 100px;
+  height: 100px;
+  fill: #FAFAFA;
+}
+
+.bombcrypt-controls #bombButton svg {
+  height: 100%;
+  width: 100%;
+}
+
+.bombcrypt-controls #bombButton svg text {
+  font-size: 6px;
+}
+
+.bombcrypt-controls #bombButton svg g {
+  opacity: 0.5;
+}
+
+.bombcrypt-controls #donation {
+  position: absolute;
+  bottom: 0;
+  font-size: 11px;
+  color: rgb(255, 115, 35);
+  left: 0;
+  font-weight: bold;
+  z-index: 999;
+}
+.bombcrypt-controls #donation label {
+  -moz-user-select: text;
+  -khtml-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+
