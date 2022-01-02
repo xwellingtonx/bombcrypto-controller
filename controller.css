@@ -80,6 +80,10 @@
   font-size: 6px;
 }
 
+.bombcrypt-controls #bombButton svg:active {
+  opacity: 0.5;
+}
+
 .bombcrypt-controls #bombButton svg g {
   opacity: 0.5;
 }
@@ -87,7 +91,7 @@
 .bombcrypt-controls #donation {
   position: absolute;
   bottom: 0;
-  font-size: 11px;
+  font-size: 10px;
   color: rgb(255, 115, 35);
   left: 0;
   font-weight: bold;
