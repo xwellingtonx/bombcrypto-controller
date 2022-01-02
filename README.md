@@ -8,6 +8,6 @@ This is a controller I've created to help play BombCrypto Adventure Mode in mobi
 2. Touch the B button to place bombs, this will simulate the SPACE key.
 
 
-# How to use?
+# Donations
 If you think this help you in somehow, please feel free to donate any value to the wallet below:
 **0xE7538a878E4448Fb9111a7B539835A4b89Ae4c33**
