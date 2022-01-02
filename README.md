@@ -7,8 +7,8 @@ This is a controller I've created to help play BombCrypto Adventure Mode in mobi
 
 ![bombcrpto-controller](https://user-images.githubusercontent.com/10274446/147887022-dd41f306-e2af-4173-9b09-8dea1fd9ba9d.gif)
 
-2. Use the joystick by holding the white circle and moving around, this simulate the press of WASD keys.
-3. Use B button to place bombs, this simulate the SPACE key.
+2. Use the joystick by holding the white circle and moving around, this simulate the WASD keys from keyboard.
+3. Use B button to place bombs, this simulate the SPACE key from keyboard.
 
 
 # Donations
