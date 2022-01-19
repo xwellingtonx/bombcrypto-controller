@@ -130,11 +130,11 @@ function moveHero(event, containerElement) {
     if (Math.abs(horizontalAxis) > deadzone) {
       if (horizontalAxis > 0) {
         //Dispatch keydown event to key 'D'
-        startKeydownInterval(68);
+        startKeydownInterval(39);
         //console.log("Debug: Move to RIGHT");
       } else if (horizontalAxis < 0) {
         //Dispatch keydown event to key 'A'
-        startKeydownInterval(65);
+        startKeydownInterval(37);
         //console.log("Debug: Move to LEFT");
       }
     }
@@ -143,11 +143,11 @@ function moveHero(event, containerElement) {
     if (Math.abs(verticalAxis) > deadzone) {
       if (verticalAxis > 0) {       
         //Dispatch keydown event to key 'S'
-        startKeydownInterval(83);
+        startKeydownInterval(40);
         //console.log("Debug: Move to DOWN");        
       } else if (verticalAxis < 0) {
         //Dispatch keydown event to key 'W'
-        startKeydownInterval(87);
+        startKeydownInterval(38);
         //console.log("Debug: Move to UP");  
       }
     }
