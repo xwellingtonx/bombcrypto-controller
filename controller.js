@@ -3,6 +3,7 @@ var cssFileName = "controller";
 var deadzone = 0.5;
 var isUsingAnalog = false;
 var keydownInterval = null;
+var gameIframe = null;
 
 if(document.getElementById(controlleId)) {
   document.getElementById(controlleId).remove();
@@ -14,35 +15,47 @@ if(document.getElementById(controlleId)) {
   div.innerHTML = createControls();
   document.body.appendChild(div); 
 
-  var gameIframe = document.querySelector("iframe");
+  var rootElement = document.querySelector("#root");
+  gameIframe = rootElement.querySelector("iframe");
+  if(gameIframe) {
+	console.log("Game Iframe found");
+	console.log(gameIframe);
+  }
 
-  document.getElementById("bombButton").addEventListener("click", (event) => {
+  document.getElementById("bombButton").addEventListener("mousedown", (event) => {
+	event.preventDefault();
     placeBomb();
   });
 
   document.getElementById("analogContainer").addEventListener("mousedown", (event) => {
+	event.preventDefault();
     isUsingAnalog = true;
   });
 
   document.getElementById("analogContainer").addEventListener("touchstart", (event) => {
+	event.preventDefault();
     isUsingAnalog = true;
   });
 
   document.getElementById("analogContainer").addEventListener("mousemove", (event) => {
+	event.preventDefault();
     moveHero(event, event.currentTarget);
   });
 
   document.getElementById("analogContainer").addEventListener("touchmove", (event) => {
+	event.preventDefault();
     moveHero(event, event.currentTarget);
   });
   
   document.getElementById("analogContainer").addEventListener("touchend", (event) => {
+	event.preventDefault();
     isUsingAnalog = false;
     stopKeydownInterval();
     resetAnalogStick(event.currentTarget);
   });
 
   document.addEventListener("mouseup", (event) => {
+	event.preventDefault();
     isUsingAnalog = false;
     stopKeydownInterval();
     resetAnalogStick(event.currentTarget);
@@ -157,7 +170,15 @@ function moveHero(event, containerElement) {
 
 function placeBomb() {
   //Dispatch Space keydown event
-  gameIframe?.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':32} ));
+  gameIframe.contentDocument.body.focus();
+  gameIframe.contentDocument.body.click();
+
+  gameIframe.contentDocument.body.dispatchEvent(new KeyboardEvent('keydown', 
+  {'keyCode':32,'key': 'Space', 'code': 'Space', 'bubbles': true, 'cancelable': true, 'composed': true, 'defaultPrevented':  true} )); //32 space
+  
+  gameIframe.contentDocument.body.dispatchEvent(new KeyboardEvent('keyup', 
+	{'keyCode':32,'key': 'Space', 'code': 'Space', 'bubbles': true, 'cancelable': true, 'composed': true, 'defaultPrevented':  true} )); //32 space
+
   console.log("Debug: Placed bomb");
 }
 
@@ -193,9 +214,13 @@ function startKeydownInterval(keyCode) {
   stopKeydownInterval();
 
   keydownInterval = setInterval(function () {
-    gameIframe?.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':keyCode} ));
+	  
+	gameIframe.contentDocument.body.focus();
+	gameIframe.contentDocument.body.click();
+    gameIframe.contentDocument.body.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':keyCode, 'bubbles': true, 'cancelable': true, 'composed': true, 'defaultPrevented':  true}  ));
+	gameIframe.contentDocument.body.dispatchEvent(new KeyboardEvent('keyup', {'keyCode':keyCode, 'bubbles': true, 'cancelable': true, 'composed': true, 'defaultPrevented':  true}  ));
     console.log("Debug: KeyDownEvent " + keyCode);
-  }, 100);
+  }, 25);
 }
 
 function stopKeydownInterval() {
