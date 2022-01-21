@@ -217,8 +217,10 @@ function startKeydownInterval(keyCode) {
 	  
 	gameIframe.contentDocument.body.focus();
 	gameIframe.contentDocument.body.click();
-   setTimeout(function () {
+   
     gameIframe.contentDocument.body.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':keyCode, 'bubbles': true, 'cancelable': true, 'composed': true, 'defaultPrevented':  true}  ));
+
+    setTimeout(function () {
 	gameIframe.contentDocument.body.dispatchEvent(new KeyboardEvent('keyup', {'keyCode':keyCode, 'bubbles': true, 'cancelable': true, 'composed': true, 'defaultPrevented':  true}  ));
     }, 950);
     console.log("Debug: KeyDownEvent " + keyCode);
