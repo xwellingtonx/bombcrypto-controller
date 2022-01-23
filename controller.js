@@ -3,6 +3,7 @@ var cssFileName = "controller";
 var deadzone = 0.5;
 var isUsingAnalog = false;
 var keydownInterval = null;
+var lastKeyCode = null;
 var gameIframe = null;
 
 if(document.getElementById(controlleId)) {
@@ -50,14 +51,14 @@ if(document.getElementById(controlleId)) {
   document.getElementById("analogContainer").addEventListener("touchend", (event) => {
 	event.preventDefault();
     isUsingAnalog = false;
-    stopKeydownInterval();
+    dispatchKeyupEvent();
     resetAnalogStick(event.currentTarget);
   });
 
   document.addEventListener("mouseup", (event) => {
 	event.preventDefault();
     isUsingAnalog = false;
-    stopKeydownInterval();
+    dispatchKeyupEvent();
     resetAnalogStick(event.currentTarget);
   });
 }
@@ -114,7 +115,7 @@ function moveHero(event, containerElement) {
     var analogStickElement = containerElement.querySelector(".analog-stick");
 
     // Get our directional values
-    const {rectCenterX, rectCenterY, touchX, touchY} = getDirectionalTouch(event, analogStickElement.getBoundingClientRect());
+    const {rectCenterX, rectCenterY, touchX, touchY} = getDirectionalTouch(event, analogStickElement.parentElement.getBoundingClientRect());
 
     // Find our Horizontal Axis
     const horizontalDifferenceFromCenter = touchX - rectCenterX;
@@ -142,12 +143,12 @@ function moveHero(event, containerElement) {
     // LEFT, RIGHT
     if (Math.abs(horizontalAxis) > deadzone) {
       if (horizontalAxis > 0) {
-        //Dispatch keydown event to key 'D'
-        startKeydownInterval(39);
+        //Dispatch keydown event to key 'ArrowRight'
+        dispatchKeydownEvent(39);
         //console.log("Debug: Move to RIGHT");
       } else if (horizontalAxis < 0) {
-        //Dispatch keydown event to key 'A'
-        startKeydownInterval(37);
+        //Dispatch keydown event to key 'ArrowLeft'
+        dispatchKeydownEvent(37);
         //console.log("Debug: Move to LEFT");
       }
     }
@@ -155,12 +156,12 @@ function moveHero(event, containerElement) {
     // UP, DOWN
     if (Math.abs(verticalAxis) > deadzone) {
       if (verticalAxis > 0) {       
-        //Dispatch keydown event to key 'S'
-        startKeydownInterval(40);
+        //Dispatch keydown event to key 'ArrowDown'
+        dispatchKeydownEvent(40);
         //console.log("Debug: Move to DOWN");        
       } else if (verticalAxis < 0) {
-        //Dispatch keydown event to key 'W'
-        startKeydownInterval(38);
+        //Dispatch keydown event to key 'ArrowUp'
+        dispatchKeydownEvent(38);
         //console.log("Debug: Move to UP");  
       }
     }
@@ -210,24 +211,24 @@ function getDirectionalTouch(event, boundingClientRect) {
   }
 }
 
-function startKeydownInterval(keyCode) {
-  stopKeydownInterval();
+function dispatchKeydownEvent(keyCode) {
 
-  keydownInterval = setInterval(function () {
-	  
-	gameIframe.contentDocument.body.focus();
-	gameIframe.contentDocument.body.click();
+  if(keyCode != lastKeyCode) {
+    dispatchKeyupEvent();
+
+    gameIframe.contentDocument.body.focus();
+	  gameIframe.contentDocument.body.click();
    
     gameIframe.contentDocument.body.dispatchEvent(new KeyboardEvent('keydown', {'keyCode':keyCode, 'bubbles': true, 'cancelable': true, 'composed': true, 'defaultPrevented':  true}  ));
+    lastKeyCode = keyCode;
 
-    setTimeout(function () {
-	gameIframe.contentDocument.body.dispatchEvent(new KeyboardEvent('keyup', {'keyCode':keyCode, 'bubbles': true, 'cancelable': true, 'composed': true, 'defaultPrevented':  true}  ));
-    }, 950);
     console.log("Debug: KeyDownEvent " + keyCode);
-  }, 1000);
+  }
 }
 
-function stopKeydownInterval() {
-  if(keydownInterval)
-    clearInterval(keydownInterval);
+function dispatchKeyupEvent() {
+  if(lastKeyCode != null) {
+    gameIframe.contentDocument.body.dispatchEvent(new KeyboardEvent('keyup', {'keyCode':lastKeyCode, 'bubbles': true, 'cancelable': true, 'composed': true, 'defaultPrevented':  true}  ));
+    lastKeyCode = null;
+  }
 }
