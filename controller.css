@@ -1,3 +1,8 @@
+html {
+  touch-action: pan-x pan-y;
+  height: 100%;
+}
+
 #bombcryptoController {
   position: fixed;
   bottom: 0;
@@ -5,7 +10,7 @@
   display: flex;
   align-items: center;
   width: 100%;
-  height: 125px;
+  height: 320px;
   user-select: none;
   background-color: rgba(0,0,0,0.5);
   padding-top: 8px;
@@ -40,8 +45,8 @@
   align-items: center;	
   pointer-events: auto;
   fill: #FAFAFA;
-  width: 120px;
-  height: 120px;
+  width: 320px;
+  height: 320px;
   margin-left: 25%;
 }
   
@@ -60,14 +65,14 @@
 
 .bombcrypt-controls .analog-stick {
   z-index: 100;
-  width: 68px !important;
-  height: 68px !important;
+  width: 120px !important;
+  height: 120px !important;
 }
 
 .bombcrypt-controls #bombButton {
   margin-right: 25%;
-  width: 100px;
-  height: 100px;
+  width: 300px;
+  height: 300px;
   fill: #FAFAFA;
 }
 
